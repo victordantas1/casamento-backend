@@ -10,7 +10,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - ./create_tables.sql:/docker-entrypoint-initdb.d/0_init.sql
+      - ./migrations/create_tables.sql:/docker-entrypoint-initdb.d/0_init.sql
       - mysql_casamento_volume:/var/lib/mysql
 volumes:
   mysql_casamento_volume:
