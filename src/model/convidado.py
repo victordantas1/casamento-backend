@@ -7,7 +7,7 @@ class Convidado(Base):
 
     convidado_id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    presenca_confirmada = Column(Enum, nullable=False, default=False)
+    presenca = Column(Enum, nullable=False, default='nao_confirmado')
 
     def confirma_presenca(self):
         if self.presenca_confirmada:
