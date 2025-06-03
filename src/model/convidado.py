@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, Boolean
+from sqlalchemy import Column, Integer, String, Enum
 
 from db import Base
 
@@ -7,7 +7,7 @@ class Convidado(Base):
 
     convidado_id = Column(Integer, primary_key=True)
     nome = Column(String, nullable=False)
-    presenca_confirmada = Column(Boolean, nullable=False, default=False)
+    presenca_confirmada = Column(Enum, nullable=False, default=False)
 
     def confirma_presenca(self):
         if self.presenca_confirmada:
