@@ -10,19 +10,19 @@ class Convidado(Base):
     presenca = Column(Enum, nullable=False, default='nao_confirmado')
 
     def confirma_presenca(self):
-        if self.presenca_confirmada:
+        if self.presenca:
             raise Exception('Presença já confirmada')
-        self.presenca_confirmada = True
+        self.presenca = True
 
     def desconfirma_presenca(self):
-        if self.presenca_confirmada:
-            self.presenca_confirmada = False
+        if self.presenca:
+            self.presenca = False
         else:
             raise Exception('Presença ainda não confirmada')
 
     def atualiza_campos(self, convidado):
-        if convidado.nome and convidado.presenca_confirmada is not None:
+        if convidado.nome and convidado.presenca is not None:
             self.nome = convidado.nome
-            self.presenca_confirmada = convidado.presenca_confirmada
+            self.presenca = convidado.presenca
         else:
             raise Exception('Campos vazios')
