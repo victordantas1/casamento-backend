@@ -10,7 +10,7 @@ class Convidado(Base):
 
     convidado_id: Mapped[int] = Column(Integer, primary_key=True)
     nome: Mapped[str] = Column(String, nullable=False)
-    presenca: Mapped[PresencaEnum] = Column(Enum, nullable=False, default='nao_confirmado')
+    presenca: Mapped[PresencaEnum] = Column(Enum('vai', 'nao_confirmado', 'nao_vai'), nullable=False, default='nao_confirmado')
 
     def confirma_presenca(self):
         if self.presenca.value == 'vai':
@@ -24,8 +24,8 @@ class Convidado(Base):
             raise Exception('Presença ainda não confirmada')
 
     def atualiza_campos(self, convidado):
-        if convidado.nome and convidado.presenca is not None:
-            self.nome = convidado.nome
-            self.presenca = convidado.presenca
+        if convidado.nome or convidado.presenca is not None:
+            self.nome = convidado.nome if convidado.nome is not None else self.nome
+            self.presenca = convidado.presenca if convidado.presenca is not None else self.presenca
         else:
             raise Exception('Campos vazios')

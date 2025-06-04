@@ -26,13 +26,19 @@ class ConvidadoRepository:
         return convidado
 
     def get_confirmados(self) -> List[Convidado]:
-        stmt = select(Convidado).where(Convidado.presenca_confirmada == True)
+        stmt = select(Convidado).where(Convidado.presenca == 'vai')
         result = self.session.execute(stmt)
         convidados = result.scalars().all()
         return list(convidados)
 
     def get_nao_confirmados(self) -> List[Convidado]:
-        stmt = select(Convidado).where(Convidado.presenca_confirmada == False)
+        stmt = select(Convidado).where(Convidado.presenca == 'nao_confirmado')
+        result = self.session.execute(stmt)
+        convidados = result.scalars().all()
+        return list(convidados)
+
+    def get_nao_vai(self):
+        stmt = select(Convidado).where(Convidado.presenca == 'nao_vai')
         result = self.session.execute(stmt)
         convidados = result.scalars().all()
         return list(convidados)

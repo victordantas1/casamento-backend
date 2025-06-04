@@ -13,7 +13,7 @@ config_test = {
 
 @pytest.fixture
 def convidado_nao_confirmado():
-    convidado = Convidado(convidado_id=1, nome='Carlos', presenca=PresencaEnum.NAO_CONFIRMADO)
+    convidado = Convidado(convidado_id=11, nome='Carlos', presenca=PresencaEnum.NAO_CONFIRMADO)
     return convidado
 
 @pytest.fixture
