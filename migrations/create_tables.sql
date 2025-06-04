@@ -3,7 +3,7 @@ USE casamento;
 CREATE TABLE convidado (
     convidado_id INT PRIMARY KEY,
     nome VARCHAR(255) NOT NULL,
-    presenca_confirmada BOOLEAN NOT NULL
+    presenca ENUM('vai', 'nao_confirmado', 'nao_vai') NOT NULL DEFAULT 'nao_confirmado'
 );
 
 CREATE TABLE noivo (

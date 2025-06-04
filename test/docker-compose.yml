@@ -1,0 +1,13 @@
+services:
+  mysql-casamento-test:
+    image: mysql:8.0
+    container_name: mysql-casamento-test
+    environment:
+      MYSQL_ROOT_PASSWORD: senha123
+      MYSQL_USER: victor
+      MYSQL_PASSWORD: senha123
+      MYSQL_DATABASE: casamento
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./migrations_test/create_tables.sql:/docker-entrypoint-initdb.d/0_init.sql

@@ -1,6 +1,6 @@
 import pytest
 
-from model import Convidado
+from model import Convidado, PresencaEnum
 
 
 class TestConvidado:
@@ -9,7 +9,7 @@ class TestConvidado:
         convidado_nao_confirmado.confirma_presenca()
 
         # Assert
-        assert convidado_nao_confirmado.presenca_confirmada == True
+        assert convidado_nao_confirmado.presenca.value == 'vai'
 
     def test_confirma_presenca_when_presenca_ja_confirmada_then_raise_exception(self, convidado_confirmado):
         with pytest.raises(Exception, match='Presença já confirmada'): # Assert
@@ -20,7 +20,7 @@ class TestConvidado:
         convidado_confirmado.desconfirma_presenca()
 
         # Assert
-        assert convidado_confirmado.presenca_confirmada == False
+        assert convidado_confirmado.presenca.value == 'nao_confirmado'
 
     def test_desconfirma_presenca_when_presenca_nao_confirmada_then_raise_exception(self, convidado_nao_confirmado):
         with pytest.raises(Exception, match='Presença ainda não confirmada'): # Assert
@@ -30,14 +30,14 @@ class TestConvidado:
         # Arrange
         convidado = Convidado()
         convidado.nome = 'Roberto'
-        convidado.presenca_confirmada = False
+        convidado.presenca = PresencaEnum.NAO_VAI
 
         # Act
         convidado_confirmado.atualiza_campos(convidado)
 
         # Assert
         assert convidado_confirmado.nome == 'Roberto'
-        assert convidado_confirmado.presenca_confirmada == False
+        assert convidado_confirmado.presenca.value == 'nao_vai'
 
     def test_atualiza_campos_when_convidado_vazio_then_raise_exception(self, convidado_confirmado):
         # Arrange
