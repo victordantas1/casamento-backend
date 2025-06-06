@@ -60,7 +60,7 @@ class ConvidadoRepository:
             return convidado
         except:
             self.session.rollback()
-            raise
+            raise Exception('Convidado inexistente')
 
     def update_by_id(self, convidado_id: int, convidado: Convidado) -> Convidado:
         try:
@@ -69,5 +69,5 @@ class ConvidadoRepository:
             self.session.commit()
         except:
             self.session.rollback()
-            raise
+            raise Exception('Convidado inexistente')
         return convidado_to_update

@@ -1,3 +1,4 @@
+CREATE DATABASE IF NOT EXISTS casamento;
 USE casamento;
 
 CREATE TABLE convidado (
